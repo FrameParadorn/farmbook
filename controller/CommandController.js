@@ -5,24 +5,10 @@ class CommandController {
 
 
   constructor() {
-    // this.commands = {
-    //     "create_parking_lot": this.createSlot,
-    //     "park":               this.allocateSlot,
-    //     "leave":              this.leaveSlot,
-    //     "leave_count":        this.showStatusLeaveCount,
-    //     "status":             this.showStatusSlot,
-    //     "registration_numbers_for_cars_with_colour": this.showRegNoByColour,
-    //     "slot_numbers_for_cars_with_colour":         this.showSlotNoByColour,
-    //     "slot_number_for_registration_number":       this.showSlotByRegNo,
-    //     "exit":                                      this.exit,
-    // }
-
     this.parking = new Parking
-
   }
 
   createSlot(args) {
-    console.log();
     if(args.length <= 0) {
       this.commandInv()
       return
@@ -55,10 +41,6 @@ class CommandController {
 
 
   showStatusSlot() {
-    if(args.length < 1) {
-      this.commandInv()
-      return
-    }
     this.parking.status()
   }
 
@@ -73,6 +55,11 @@ class CommandController {
     slots.map(( slot, i ) => {
       result.push(slot.car.regNo)
     })
+    if(result.length === 0) {
+      console.log("No found slot color is : " + args[0]);
+      return
+    }
+
     console.log(result.toString()); 
 
   }
@@ -88,6 +75,12 @@ class CommandController {
     slots.map(( slot, i ) => {
       result.push(slot.no)
     })
+
+    if(result.length === 0) {
+      console.log("No found slot color is : " + args[0]);
+      return
+    }
+
     console.log(result.toString()); 
 
   }
@@ -104,6 +97,12 @@ class CommandController {
     slots.map(( slot, i ) => {
       result.push(slot.no)
     })
+
+    if(result.length === 0) {
+      console.log("No found slot number is : " + args[0]);
+      return
+    }
+
     console.log(result.toString()); 
 
   }

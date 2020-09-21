@@ -10,13 +10,14 @@ class Parking {
 
 
   createSlot(quantity) {
-    for(let i = 0; i<quantity; i++) {
+    let i;
+    for(i = 0; i<quantity; i++) {
       let slot = new Slot
       slot.no = i + 1
       this.slots.push(slot)
     } 
 
-    console.log(this.slots);
+    console.log("Created a parking lot with " + (i) + " slots");
   }
 
 
