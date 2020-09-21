@@ -52,8 +52,61 @@ class CommandController {
 
     this.parking.leave(args[0])
   }    
-  
 
+
+  showStatusSlot() {
+    if(args.length < 1) {
+      this.commandInv()
+      return
+    }
+    this.parking.status()
+  }
+
+  showRegNoByColor(args) {
+    if(args.length < 1) {
+      this.commandInv()
+      return
+    }
+    let slots = this.parking.find("color", args[0])
+
+    let result = []
+    slots.map(( slot, i ) => {
+      result.push(slot.car.regNo)
+    })
+    console.log(result.toString()); 
+
+  }
+
+  showSlotNoByColor(args) {
+    if(args.length < 1) {
+      this.commandInv()
+      return
+    }
+    let slots = this.parking.find("SlotNo", args[0])
+
+    let result = []
+    slots.map(( slot, i ) => {
+      result.push(slot.no)
+    })
+    console.log(result.toString()); 
+
+  }
+
+
+  showSlotByRegNo(args) {
+    if(args.length < 1) {
+      this.commandInv()
+      return
+    }
+    let slots = this.parking.find("RegNo", args[0])
+
+    let result = []
+    slots.map(( slot, i ) => {
+      result.push(slot.no)
+    })
+    console.log(result.toString()); 
+
+  }
 
   commandInv() {
     console.log("Command Invalid");
@@ -75,6 +128,18 @@ class CommandController {
         break
       case "leave" :
         this.leaveSlot(args)
+        break
+      case "status" :
+        this.showStatusSlot()
+        break
+      case "registration_numbers_for_cars_with_colour" :
+        this.showRegNoByColor(args)
+        break
+      case "slot_numbers_for_cars_with_colour" :
+        this.showSlotNoByColor(args)
+        break
+      case "slot_number_for_registration_number":
+        this.showSlotByRegNo(args)
         break
       default:
         this.commandInv()

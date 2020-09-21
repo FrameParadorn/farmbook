@@ -75,6 +75,50 @@ class Parking {
     console.log("Slot number " + slotNo + " not found");
   }
 
+
+  status() {
+    console.log("Slot No.  Registrator No.    Color");
+    this.slots.map((slot, i) => {
+      if(slot.car !== null) {
+        console.log(slot.no + "         " + slot.car.regNo + "      " + slot.car.color);
+      }
+    })
+  }
+
+
+  findByColor(keyword) {
+    let result = [] 
+    this.slots.map(slot => {
+      if(slot.car !== null && slot.car.color === keyword) {
+        result.push(slot)
+      }
+    })
+    return result
+  }
+
+  findByRegNo(keyword) {
+    let result = [] 
+    this.slots.map(slot => {
+      if(slot.car !== null && slot.car.regNo === keyword) {
+        result.push(slot)
+      }
+    })
+    return result
+  }
+
+
+  find(column, keyword) {
+    switch(column) {
+      case "color":
+      case "SlotNo":
+        return this.findByColor(keyword)
+        break
+      default :
+        return this.findByRegNo(keyword)
+    }
+
+  }
+
 }
 
 
