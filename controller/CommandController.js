@@ -1,36 +1,44 @@
-
+const parking = require("../model/parking.js")
 
 class CommandController {
 
-  commands = [
-    {
-      "create_parking_lot": this.CreateSlot,
-    }
-  ]
 
-  createSlot() {
-    console.log("Create slot")
+  constructor() {
+    // this.commands = {
+    //     "create_parking_lot": this.createSlot,
+    //     "park":               this.allocateSlot,
+    //     "leave":              this.leaveSlot,
+    //     "leave_count":        this.showStatusLeaveCount,
+    //     "status":             this.showStatusSlot,
+    //     "registration_numbers_for_cars_with_colour": this.showRegNoByColour,
+    //     "slot_numbers_for_cars_with_colour":         this.showSlotNoByColour,
+    //     "slot_number_for_registration_number":       this.showSlotByRegNo,
+    //     "exit":                                      this.exit,
+    // }
+
+    this.parking = new parking
+
+  }
+
+  createSlot(args) {
+    this.parking.createSlot(args[0])
   }
 
 
   run(line) {
-    line = line.split(" ");  
+    line = line.split(" ")  
 
     let command = line[0] 
-    console.log(command);
+    let args = line.slice(1)
+
+    switch(command) {
+      case "create_parking_lot" :
+        this.createSlot(args)
+        break;
+    }
   }
   
 }
 
-
-
-	// "park":               allocateSlot,
-	// "leave":              leaveSlot,
-	// "leave_count":        showStatusLeaveCount,
-	// "status":             showStatusSlot,
-	// "registration_numbers_for_cars_with_colour": showRegNoByColour,
-	// "slot_numbers_for_cars_with_colour":         showSlotNoByColour,
-	// "slot_number_for_registration_number":       showSlotByRegNo,
-	// "exit":                                      exit,
 
 module.exports = CommandController
