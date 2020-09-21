@@ -1,4 +1,5 @@
-const parking = require("../model/parking.js")
+const Parking = require("../model/parking.js")
+const Car = require("../model/car.js")
 
 class CommandController {
 
@@ -16,12 +17,46 @@ class CommandController {
     //     "exit":                                      this.exit,
     // }
 
-    this.parking = new parking
+    this.parking = new Parking
 
   }
 
   createSlot(args) {
+    console.log();
+    if(args.length <= 0) {
+      this.commandInv()
+      return
+    }
     this.parking.createSlot(args[0])
+  }
+
+
+  allocateSlot(args) {
+    if(args.length < 2) {
+      this.commandInv()
+      return
+    }
+
+    let car = new Car
+    car.regNo = args[0]
+    car.color = args[1]
+    this.parking.allocate(car)
+  }
+
+
+  leaveSlot(args) {
+    if(args.length < 1) {
+      this.commandInv()
+      return
+    }
+
+    this.parking.leave(args[0])
+  }    
+  
+
+
+  commandInv() {
+    console.log("Command Invalid");
   }
 
 
@@ -34,7 +69,14 @@ class CommandController {
     switch(command) {
       case "create_parking_lot" :
         this.createSlot(args)
-        break;
+        break
+      case "park":
+        this.allocateSlot(args)
+        break
+      case "leave" :
+        this.leave(args)
+      default:
+        this.commandInv()
     }
   }
   

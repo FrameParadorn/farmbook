@@ -11,8 +11,8 @@ const rl = readline.createInterface({
 rl.setPrompt("$ ")
 rl.prompt();
 
+let command = new CommandController()
 rl.on("line", line => {
-  let command = new CommandController()
   command.run(line)
   rl.prompt();
 })
