@@ -57,7 +57,23 @@ class Parking {
   }
 
 
+  leave(slotNo) {
+	  let found = false
+    this.slots = this.slots.map((slot, i) => {
+      if( slot.no == slotNo ) {
+        slot.car = null
+			  found = true
+      }
+      return slot
+    })
 
+    if ( found ) {
+      console.log("Slot number " + slotNo + " is free"); 
+      return
+    }
+
+    console.log("Slot number " + slotNo + " not found");
+  }
 
 }
 

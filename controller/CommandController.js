@@ -74,7 +74,8 @@ class CommandController {
         this.allocateSlot(args)
         break
       case "leave" :
-        this.leave(args)
+        this.leaveSlot(args)
+        break
       default:
         this.commandInv()
     }
